@@ -10,7 +10,8 @@ class App extends Component {
                   { name: 'chinna' , age: 29},
                   { name: 'chinna' , age: 40},
       ],
-      otherState: 'sample text'
+      otherState: 'sample text',
+      showPersons: false
   }
 
   switchNameHandler = ()=>{
@@ -41,6 +42,11 @@ class App extends Component {
             ]
         })
     }
+    togglePersonsHandler = () => {
+      const curState = this.state.showPersons;
+      this.setState({ showPersons: !curState });
+      console.log(this.state.showPersons);
+    }
   render() {
       const style={
           backgroundColor:'white',
@@ -49,19 +55,38 @@ class App extends Component {
           padding: '8px',
           cursor: 'pointer'
       }
+
+      let persons = null;
+      if(this.state.showPersons){
+        persons = ( 
+          <div>
+
+                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameDynaimcHandler.bind(this, {name:'sample', age:34} )} name={this.state.persons[0].name } age={this.state.persons[0].age}/>
+                  <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameHandler} name={this.state.persons[1].name} age={this.state.persons[1].age}> My Hobbies : Surfing Internet </Person>
+                  <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameHandler} name={this.state.persons[2].name} age ={this.state.persons[2].age}/>
+                  
+          </div>
+        )
+      }
     return (
             <div className="App">
               <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
+                </header>
                 <p>
                  Hi Iam react app ,
                 </p>
+
                   <button style={style} onClick={this.switchNameHandler}>Change Name</button>
-                  <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameDynaimcHandler.bind(this, {name:'sample', age:34} )} name={this.state.persons[0].name } age={this.state.persons[0].age}/>
+                  <button  style={style} onClick={this.togglePersonsHandler}>show / Hide Persons</button>
+                  {/* { this.state.showPersons ? 
+                  <div>
+                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameDynaimcHandler.bind(this, {name:'sample', age:34} )} name={this.state.persons[0].name } age={this.state.persons[0].age}/>
                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameHandler} name={this.state.persons[1].name} age={this.state.persons[1].age}> My Hobbies : Surfing Internet </Person>
                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameHandler} name={this.state.persons[2].name} age ={this.state.persons[2].age}/>
-
-              </header>
+                  </div> : null
+                  } */}
+                  { persons}
             </div>
 
           );
