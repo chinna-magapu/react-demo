@@ -38,7 +38,8 @@ class App extends Component {
                 { name: 'nani' , age: 29},
                 { name: event.target.value , age: 29},
                 { name: 'satish' , age: 35},
-            ]
+            ],
+            showPersons: false
         })
     }
   render() {
@@ -57,10 +58,11 @@ class App extends Component {
                  Hi Iam react app ,
                 </p>
                   <button style={style} onClick={this.switchNameHandler}>Change Name</button>
+                  <div>
                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameDynaimcHandler.bind(this, {name:'sample', age:34} )} name={this.state.persons[0].name } age={this.state.persons[0].age}/>
                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameHandler} name={this.state.persons[1].name} age={this.state.persons[1].age}> My Hobbies : Surfing Internet </Person>
                   <Person changed={this.NameChangeDynaimcHandler} click={this.switchNameHandler} name={this.state.persons[2].name} age ={this.state.persons[2].age}/>
-
+                  </div>
               </header>
             </div>
 
