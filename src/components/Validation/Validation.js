@@ -1,5 +1,5 @@
 import React from 'react';
-import  './Validation.css';
+import './Validation.css';
 
 const Validation = (props) => {
     let valid = null;
