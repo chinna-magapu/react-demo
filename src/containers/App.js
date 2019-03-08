@@ -7,17 +7,32 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-    state = {
-        persons: [
-            {id: 121, name: 'vinay', age: 29},
-            {id: 122, name: 'chinna', age: 29},
-            {id: 123, name: 'chinna', age: 40},
-        ],
-        otherState: 'sample text',
-        showPersons: false,
-        textLength: 0,
-        textValue: ''
+
+    constructor( props ){
+            super(props);
+            console.log('[App.js], constructor');
+        this.state = {
+            persons: [
+                {id: 121, name: 'vinay', age: 29},
+                {id: 122, name: 'chinna', age: 29},
+                {id: 123, name: 'chinna', age: 40},
+            ],
+            otherState: 'sample text',
+            showPersons: false,
+            textLength: 0,
+            textValue: ''
+        }
     }
+
+    static getDerivedStateFromProps(props, state){
+        console.log('[App.js] | getDerivedStateFromProps', props);
+        return state;
+    }
+
+    componentDidMount(){
+        console.log('[App.js] | componentDidMount');
+    }
+
 
     switchNameHandler = () => {
         // Don't do this this.state.persons[0].name = 'hellllo';
@@ -79,7 +94,7 @@ class App extends Component {
 
     render() {
 
-
+        console.log('render');
         let persons = null;
         if (this.state.showPersons) {
             persons = <Persons
@@ -95,7 +110,7 @@ class App extends Component {
             chars = (
                 <div>
                     {strArr.map((char, index) => {
-                        return <Char character={char} click={this.deleteCharFromTextHandler.bind(this, index)}/>
+                        return <Char key={ index } character={char}  click={this.deleteCharFromTextHandler.bind(this, index)}/>
                     })
                     }
                 </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Person from './Person/Person';
 
 const Persons = ( props ) => {
+    console.log('rendering persons component');
     return (
         <div>
             {
