@@ -5,6 +5,7 @@ import Validation from '../components/Validation/Validation';
 import Char from '../components/Char/Char';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends Component {
 
@@ -119,7 +120,7 @@ class App extends Component {
 
 
         return (
-            <div className="App">
+            <WithClass classes="App">
                 <Cockpit showPersons={this.state.showPersons} clicked={this.togglePersonsHandler}/>
                 <div>
                 <span>
@@ -135,7 +136,7 @@ class App extends Component {
                     </div>
                 </div>
                 {persons}
-            </div>
+            </WithClass>
         );
 
         // return React.createElement('div' , {className:'App'}, React.createElement('p',null, 'Hi, I\'m React App'));
