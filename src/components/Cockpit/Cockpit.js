@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Cockpit = (props) => {
     const style={
@@ -10,6 +10,12 @@ const Cockpit = (props) => {
         cursor: 'pointer',
         borderRadius : '5px'
     };
+
+    useEffect( () => {
+        console.log('USe effect | cockpit js');
+        setTimeout( () => {
+            alert('data saved to cloud');  })
+    }, [])
 
     if(props.showPersons){
         style.backgroundColor = 'red';
