@@ -2,7 +2,7 @@ import React , { Component} from 'react';
 import './Person.css';
 import Wrap from '../../../hoc/Wrap';
 import propTypes from 'prop-types';
-const Person = (props) => {
+const Person = (props) => {   
 
     return (
         <Wrap>
