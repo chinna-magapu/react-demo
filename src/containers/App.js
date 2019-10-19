@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import logo from '../logo.svg';
 import './App.css';
 import Validation from '../components/Validation/Validation';
 import Char from '../components/Char/Char';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+import * as actionTypes from '../store/actions';
 
 class App extends Component {
 
@@ -103,13 +107,24 @@ class App extends Component {
         console.log(this.state.showPersons);
     }
 
+    addPersonHandler = () => {
+        const person = {
+            id: 121, name: 'dynamo', age: '30'
+        }
+        const persons = [...this.state.persons];
+        persons.push(person);
+        this.setState({
+            persons: persons
+        })
+    }
+
     render() {
 
         console.log('render');
         let persons = null;
         if (this.state.showPersons) {
             persons = <Persons
-                persons={this.state.persons}
+                persons={this.props.prs}
                 changed={this.NameChangeDynaimcHandler}
                 clicked={this.deletePersonHandler}
             />
@@ -130,7 +145,7 @@ class App extends Component {
 
 
         return (
-            <div className="App">
+            <WithClass classes="App">
                 <Cockpit showPersons={this.state.showPersons} clicked={this.togglePersonsHandler}/>
                 <div>
                 <span>
@@ -145,12 +160,26 @@ class App extends Component {
                         {chars}
                     </div>
                 </div>
+                <button onClick={this.props.onAddedPerson}>Add Person</button>
                 {persons}
-            </div>
+            </WithClass>
         );
 
         // return React.createElement('div' , {className:'App'}, React.createElement('p',null, 'Hi, I\'m React App'));
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        prs : state.persons
+    };
+}
+
+const mapDispatchToProps =  dispatch => {
+    return {
+        onAddedPerson: () => dispatch({type: actionTypes.ADD_PERSON}),
+        onRemovedPerson: ( id ) => dispatch({ type: actionTypes.REMOVE_PERSON, personId: id})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
